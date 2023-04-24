@@ -1,9 +1,11 @@
-"""renpy
-init python:
-"""
 from __future__ import annotations
 from enum import Enum
 import enum
+
+
+"""renpy
+init python:
+"""
 
 
 class Reputations(Enum):
