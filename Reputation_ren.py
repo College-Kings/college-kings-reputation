@@ -60,7 +60,7 @@ class Reputation:
             return
 
         if store.pb_reputation_notification:
-            renpy.show_screen("popup", message=f"{var.name.capitalize()} point added")
+            renpy.notify(f"{var.name.capitalize()} point added")
 
         old_reputation: Reputations = self()
 
