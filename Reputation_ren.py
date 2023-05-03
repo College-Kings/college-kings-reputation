@@ -54,7 +54,7 @@ class Reputation:
             )
         ]
 
-    def add_point(self, var: Reputations, value: int = 1) -> None:
+    def add_point(self, var: RepComponent, value: int = 1) -> None:
         # Don't update reputation if reputation is locked
         if store.locked_reputation or store._in_replay:
             return

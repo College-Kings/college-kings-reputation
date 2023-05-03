@@ -1,7 +1,5 @@
-from __future__ import annotations
 from enum import Enum
 import enum
-
 
 """renpy
 init python:
@@ -18,5 +16,5 @@ class Reputations(Enum):
     TROUBLEMAKER = "troublemaker"
 
     @classmethod
-    def _missing_(cls, value) -> Reputations:
+    def _missing_(cls, value):
         return cls.POPULAR
