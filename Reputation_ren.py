@@ -1,11 +1,14 @@
 from typing import Any
 
-from renpy import store, config
+from renpy import config
 import renpy.exports as renpy
 
 from game.reputation.RepComponent_ren import RepComponent
 from game.reputation.Reputations_ren import Reputations
 
+locked_reputation: bool
+_in_replay: bool
+pb_reputation_notification: bool
 
 """renpy
 init python:
@@ -56,10 +59,10 @@ class Reputation:
 
     def add_point(self, var: RepComponent, value: int = 1) -> None:
         # Don't update reputation if reputation is locked
-        if store.locked_reputation or store._in_replay:
+        if locked_reputation or _in_replay:
             return
 
-        if store.pb_reputation_notification:
+        if pb_reputation_notification:
             renpy.notify(f"{var.name.capitalize()} point added")
 
         old_reputation: Reputations = self()
@@ -97,5 +100,5 @@ class Reputation:
             }
 
 
-def helper_sorted_by_value(item) -> Any:
+def helper_sorted_by_value(item: tuple[Any, Any]) -> Any:
     return item[1]
