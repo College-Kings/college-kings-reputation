@@ -74,10 +74,6 @@ class Reputation:
             renpy.notify(f"Your reputation has changed to {self().name}")
 
     def change_reputation(self, target_reputation: Reputations) -> None:
-        if not config.developer:
-            print("Debug functions are only available in the development enviroment.")
-            return
-
         if target_reputation == Reputations.POPULAR:
             self.components = {
                 RepComponent.BRO: 20,
