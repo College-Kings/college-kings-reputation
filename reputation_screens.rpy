@@ -24,12 +24,13 @@ screen reputation_popup(required_reputation=None):
     modal True
     zorder 300
 
-    $ reputation = reputation()
+    python:
+        reputation = reputation()
 
-    if required_reputation is None or required_reputation == reputation:
-        $ message = "Congratulations! Your Key Character Trait {b}[reputation.name]{/b} has just changed the outcome of a decision someone was making."
-    else:
-        $ message = "Unfortunately, your Key Character Trait {b}[reputation.name]{/b} did not change the outcome of this decision."
+        if required_reputation is None or required_reputation == reputation:
+            message = f"Congratulations! Your Key Character Trait {{b}}{reputation.name}{{/b}} has just changed the outcome of a decision someone was making."
+        else:
+            message = f"Unfortunately, your Key Character Trait {{b}}{reputation.name}{{/b}} did not change the outcome of this decision."
 
     use alert_template(message):
         textbutton "OK":
