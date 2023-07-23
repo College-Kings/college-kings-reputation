@@ -1,6 +1,3 @@
-from typing import Any
-
-from renpy import config
 import renpy.exports as renpy
 
 from game.reputation.RepComponent_ren import RepComponent
@@ -24,6 +21,15 @@ class Reputation:
         }
 
     def __call__(self) -> Reputations:
+        if RepComponent.BRO not in self.components:
+            self.components[RepComponent.BRO] = self.components.pop("bro")  # type: ignore
+
+        if RepComponent.BOYFRIEND not in self.components:
+            self.components[RepComponent.BOYFRIEND] = self.components.pop("boyfriend")  # type: ignore
+
+        if RepComponent.TROUBLEMAKER not in self.components:
+            self.components[RepComponent.TROUBLEMAKER] = self.components.pop("troublemaker")  # type: ignore
+
         bro: int = self.components[RepComponent.BRO]
         boyfriend: int = self.components[RepComponent.BOYFRIEND]
         troublemaker: int = self.components[RepComponent.TROUBLEMAKER]
@@ -52,7 +58,7 @@ class Reputation:
 
         return [
             k
-            for k, v in sorted(
+            for k, _ in sorted(
                 reputation_dict.items(), key=helper_sorted_by_value, reverse=True
             )
         ]
@@ -96,5 +102,5 @@ class Reputation:
             }
 
 
-def helper_sorted_by_value(item: tuple[Any, Any]) -> Any:
+def helper_sorted_by_value(item: tuple[object, float]) -> float:
     return item[1]
