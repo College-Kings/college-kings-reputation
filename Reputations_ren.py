@@ -16,5 +16,5 @@ class Reputations(Enum):
     TROUBLEMAKER = "troublemaker"
 
     @classmethod
-    def _missing_(cls, value):
+    def _missing_(cls, value: object) -> "Reputations":
         return cls.POPULAR
