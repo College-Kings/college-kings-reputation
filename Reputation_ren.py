@@ -14,22 +14,13 @@ init python:
 
 class Reputation:
     def __init__(self) -> None:
-        self.components: dict[RepComponent, int] = {
+        self._components: dict[RepComponent, int] = {
             RepComponent.BRO: 1,
             RepComponent.BOYFRIEND: 2,
             RepComponent.TROUBLEMAKER: 2,
         }
 
     def __call__(self) -> Reputations:
-        if RepComponent.BRO not in self.components:
-            self.components[RepComponent.BRO] = self.components.pop("bro")  # type: ignore
-
-        if RepComponent.BOYFRIEND not in self.components:
-            self.components[RepComponent.BOYFRIEND] = self.components.pop("boyfriend")  # type: ignore
-
-        if RepComponent.TROUBLEMAKER not in self.components:
-            self.components[RepComponent.TROUBLEMAKER] = self.components.pop("troublemaker")  # type: ignore
-
         bro: int = self.components[RepComponent.BRO]
         boyfriend: int = self.components[RepComponent.BOYFRIEND]
         troublemaker: int = self.components[RepComponent.TROUBLEMAKER]
@@ -42,6 +33,26 @@ class Reputation:
         }
 
         return max(reputation_dict, key=lambda k: reputation_dict[k])
+
+    @property
+    def components(self) -> dict[RepComponent, int]:
+        if self.__dict__.get("components", {}):
+            self._components = {k: v for k, v in self.__dict__["components"].items()}
+
+        old = {k: v for k, v in self._components.items()}
+        for k, v in old.items():
+            if k == "bro" or k == Reputations.BRO:  # type: ignore
+                self._components[RepComponent.BRO] = v
+            elif k == "boyfriend" or k == Reputations.BOYFRIEND:  # type: ignore
+                self._components[RepComponent.BOYFRIEND] = v
+            elif k == "troublemaker" or k == Reputations.TROUBLEMAKER:  # type: ignore
+                self._components[RepComponent.TROUBLEMAKER] = v
+
+        return self._components
+
+    @components.setter
+    def components(self, value: dict[RepComponent, int]) -> None:
+        self._components = value
 
     @property
     def sorted_reputations(self) -> list[Reputations]:
