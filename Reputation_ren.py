@@ -36,8 +36,13 @@ class Reputation:
 
     @property
     def components(self) -> dict[RepComponent, int]:
-        if self.__dict__.get("components", {}):
-            self._components = {k: v for k, v in self.__dict__["components"].items()}
+        try:
+            self._components
+        except AttributeError:
+            if self.__dict__.get("components", {}):
+                self._components = {
+                    k: v for k, v in self.__dict__["components"].items()
+                }
 
         old = {k: v for k, v in self._components.items()}
         for k, v in old.items():
