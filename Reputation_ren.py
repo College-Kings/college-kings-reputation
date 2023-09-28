@@ -39,10 +39,8 @@ class Reputation:
         try:
             self._components
         except AttributeError:
-            if self.__dict__.get("components", {}):
-                self._components = {
-                    k: v for k, v in self.__dict__["components"].items()
-                }
+            old_components = self.__dict__.get("components", {})
+            self._components = {k: v for k, v in old_components.items()}
 
         old = {k: v for k, v in self._components.items()}
         for k, v in old.items():
