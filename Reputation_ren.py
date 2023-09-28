@@ -42,6 +42,11 @@ class Reputation:
             old_components = self.__dict__.get("components", {})
             self._components = {k: v for k, v in old_components.items()}
 
+        try:
+            self._components
+        except AttributeError:
+            self._components = {}
+
         old = {k: v for k, v in self._components.items()}
         for k, v in old.items():
             if k == "bro" or k == Reputations.BRO:  # type: ignore
