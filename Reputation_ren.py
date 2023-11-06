@@ -74,3 +74,12 @@ class Reputation:
 
     def change_reputation(self, target_reputation: Reputations) -> None:
         ReputationService.change_reputation(self, target_reputation)
+
+    def is_popular(self) -> bool:
+        return self() == Reputations.POPULAR
+
+    def is_confident(self) -> bool:
+        return self() == Reputations.CONFIDENT
+
+    def is_loyal(self) -> bool:
+        return self() == Reputations.LOYAL
