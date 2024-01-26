@@ -41,7 +41,7 @@ class ReputationService:
             return
 
         if pb_reputation_notification:
-            renpy.notify(f"{var.name.capitalize()} point added")  # type: ignore
+            renpy.notify(f"{var.name.capitalize()} point added")
 
         old_reputation: Reputations = reputation()
 
@@ -51,7 +51,7 @@ class ReputationService:
 
         # Notify user on reputation change
         if new_reputation != old_reputation:
-            renpy.notify(f"Your reputation has changed to {new_reputation.name}")  # type: ignore
+            renpy.notify(f"Your reputation has changed to {new_reputation.name}")
 
     @staticmethod
     def change_reputation(
