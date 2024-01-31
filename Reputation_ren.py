@@ -21,7 +21,7 @@ class Reputation:
             RepComponent.TROUBLEMAKER: 2,
         }
 
-    def __call__(self) -> Reputations:
+    def __call__(self) -> "Reputations":
         bro: int = self.components[RepComponent.BRO]
         boyfriend: int = self.components[RepComponent.BOYFRIEND]
         troublemaker: int = self.components[RepComponent.TROUBLEMAKER]
@@ -66,13 +66,13 @@ class Reputation:
         self._components = value
 
     @property
-    def sorted_reputations(self) -> list[Reputations]:
+    def sorted_reputations(self) -> list["Reputations"]:
         return ReputationService.sort_reputation(self.components)
 
     def add_point(self, var: RepComponent, value: int = 1) -> None:
         ReputationService.add_points(self, var, value)
 
-    def change_reputation(self, target_reputation: Reputations) -> None:
+    def change_reputation(self, target_reputation: "Reputations") -> None:
         ReputationService.change_reputation(self, target_reputation)
 
     def is_popular(self) -> bool:

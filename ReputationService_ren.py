@@ -15,7 +15,7 @@ init python:
 
 class ReputationService:
     @staticmethod
-    def sort_reputation(components: dict[RepComponent, int]) -> list[Reputations]:
+    def sort_reputation(components: dict[RepComponent, int]) -> list["Reputations"]:
         bro: int = components[RepComponent.BRO]
         boyfriend: int = components[RepComponent.BOYFRIEND]
         troublemaker: int = components[RepComponent.TROUBLEMAKER]
@@ -55,7 +55,7 @@ class ReputationService:
 
     @staticmethod
     def change_reputation(
-        reputation: Reputation, target_reputation: Reputations
+        reputation: Reputation, target_reputation: "Reputations"
     ) -> None:
         if target_reputation == Reputations.POPULAR:
             reputation.components = {

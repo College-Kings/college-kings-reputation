@@ -17,7 +17,7 @@ python early:
 """
 
 
-def parse_add_rep_point(lexer: Lexer) -> PyExpr:
+def parse_add_rep_point(lexer: "Lexer") -> "PyExpr":
     rep_component: Optional[PyExpr] = lexer.simple_expression()
     if not rep_component:
         renpy.error("Expected RepComponent")
@@ -25,14 +25,14 @@ def parse_add_rep_point(lexer: Lexer) -> PyExpr:
     return rep_component
 
 
-def lint_add_rep_point(rep_component_expr: PyExpr) -> None:
+def lint_add_rep_point(rep_component_expr: "PyExpr") -> None:
     try:
         eval(rep_component_expr)
     except Exception:
         renpy.error(f"Invalid achievement: {rep_component_expr}")
 
 
-def execute_add_rep_point(rep_component_expr: PyExpr) -> None:
+def execute_add_rep_point(rep_component_expr: "PyExpr") -> None:
     rep_component: RepComponent = eval(rep_component_expr)
 
     ReputationService.add_points(reputation, rep_component)
