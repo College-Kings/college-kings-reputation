@@ -12,5 +12,5 @@ class RepComponent(Enum):
     TROUBLEMAKER = enum.auto()
 
     @classmethod
-    def _missing_(cls, value):
+    def _missing_(cls, value: object) -> "RepComponent":
         return cls.BRO
