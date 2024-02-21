@@ -20,7 +20,7 @@ python early:
 def parse_add_rep_point(lexer: "Lexer") -> "PyExpr":
     rep_component: Optional[PyExpr] = lexer.simple_expression()
     if not rep_component:
-        renpy.error("Expected RepComponent")
+        lexer.error("Expected RepComponent")
 
     return rep_component
 
@@ -38,7 +38,7 @@ def execute_add_rep_point(rep_component_expr: "PyExpr") -> None:
     ReputationService.add_points(reputation, rep_component)
 
 
-renpy.register_statement(
+renpy.register_statement(  # type: ignore
     name="add_rep_point",
     parse=parse_add_rep_point,
     lint=lint_add_rep_point,
