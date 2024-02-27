@@ -69,6 +69,18 @@ class Reputation:
     def sorted_reputations(self) -> list["Reputations"]:
         return ReputationService.sort_reputation(self.components)
 
+    @property
+    def popular(self) -> bool:
+        return self() == Reputations.POPULAR
+
+    @property
+    def confident(self) -> bool:
+        return self() == Reputations.CONFIDENT
+
+    @property
+    def loyal(self) -> bool:
+        return self() == Reputations.LOYAL
+
     def add_point(self, var: RepComponent, value: int = 1) -> None:
         ReputationService.add_points(self, var, value)
 
