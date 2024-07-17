@@ -2,10 +2,7 @@ from game.reputation.RepComponent_ren import RepComponent
 from game.reputation.Reputation_ren import Reputation
 from game.reputation.Reputations_ren import Reputations
 
-import renpy.exports as renpy
-
 locked_reputation: bool
-_in_replay: bool
 pb_reputation_notification: bool
 
 """renpy
@@ -33,25 +30,6 @@ class ReputationService:
                 reputation_dict.items(), key=helper_sorted_by_value, reverse=True
             )
         ]
-
-    @staticmethod
-    def add_points(reputation: Reputation, var: RepComponent, value: int = 1) -> None:
-        # Don't update reputation if reputation is locked
-        if locked_reputation or _in_replay:
-            return
-
-        if pb_reputation_notification:
-            renpy.notify(f"{var.name.capitalize()} point added")
-
-        old_reputation: Reputations = reputation()
-
-        reputation.components[var] += value
-
-        new_reputation: Reputations = reputation()
-
-        # Notify user on reputation change
-        if new_reputation != old_reputation:
-            renpy.notify(f"Your reputation has changed to {new_reputation.name}")
 
     @staticmethod
     def change_reputation(

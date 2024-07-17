@@ -6,7 +6,6 @@ import renpy.exports as renpy
 
 from game.reputation.RepComponent_ren import RepComponent
 from game.reputation.Reputation_ren import Reputation
-from game.reputation.ReputationService_ren import ReputationService
 
 locked_reputation: bool
 pb_reputation_notification: bool
@@ -35,7 +34,7 @@ def lint_add_rep_point(rep_component_expr: "PyExpr") -> None:
 def execute_add_rep_point(rep_component_expr: "PyExpr") -> None:
     rep_component: RepComponent = eval(rep_component_expr)
 
-    ReputationService.add_points(reputation, rep_component)
+    reputation.add_point(rep_component)
 
 
 renpy.register_statement(  # type: ignore
